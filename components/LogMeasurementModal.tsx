@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -35,9 +36,25 @@ export default function LogMeasurementModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent
+        style={{
+          display: open ? "block" : "none",
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 1000,
+          backgroundColor: "white",
+          padding: "20px",
+          borderRadius: "8px",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+        }}
+      >
         <DialogHeader>
           <DialogTitle>Log Measurement</DialogTitle>
+          <DialogDescription>
+            Enter your health measurements below.
+          </DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
           <div>

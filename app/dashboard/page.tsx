@@ -136,6 +136,9 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen p-4">
       <h1 className="text-2xl font-bold mb-6">Health Dashboard</h1>
+      <Button onClick={() => setModalOpen(true)} className="mb-6">
+        Add Measurement
+      </Button>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
@@ -218,17 +221,6 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
-
-      {/* Floating Action Button */}
-      <div className="fixed bottom-4 right-4">
-        <Button
-          onClick={() => setModalOpen(true)}
-          className="rounded-full w-12 h-12 shadow-lg"
-        >
-          <Plus size={24} />
-        </Button>
-      </div>
-
       <LogMeasurementModal open={modalOpen} onOpenChange={setModalOpen} />
     </div>
   );
