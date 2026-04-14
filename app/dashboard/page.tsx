@@ -58,11 +58,18 @@ export default function DashboardPage() {
     })
     .slice(0, 30);
 
-  const caloriesData = measurements
+  const caloriesMap = {};
+  measurements
     .filter((m) => m.type === "calories")
-    .map((m) => ({
-      date: new Date(m.date).toISOString().split("T")[0],
-      value: parseFloat(m.value),
+    .forEach((m) => {
+      const date = new Date(m.date).toISOString().split("T")[0];
+      const value = parseFloat(m.value);
+      caloriesMap[date] = (caloriesMap[date] || 0) + value;
+    });
+  const caloriesData = Object.keys(caloriesMap)
+    .map((date) => ({
+      date,
+      value: caloriesMap[date],
     }))
     .slice(0, 30);
 
