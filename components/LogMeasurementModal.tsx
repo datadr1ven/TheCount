@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { supabase } from "@/lib/supabase/client";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,9 +28,30 @@ export default function LogMeasurementModal({
   const [value, setValue] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
-  const handleSubmit = () => {
-    // Here you would typically save to Supabase or state
-    console.log({ measurementType, value, date });
+  const handleSubmit = async () => {
+    if (!measurementType || !value || !date) return;
+
+    let formattedValue = value;
+    if (measurementType === "bp") {
+      // For BP, store as 'systolic/diastolic'
+      formattedValue = value;
+    }
+
+    const { error } = await supabase
+      .from("measurements")
+      .insert({ type: measurementType, value: formattedValue, date });
+
+    if (error) {
+      console.error("Error inserting measurement:", error);
+      setError("Failed to save measurement");
+      return;
+    }
+
+    console.log("Measurement saved:", {
+      measurementType,
+      value: formattedValue,
+      date,
+    });
     onOpenChange(false);
   };
 
