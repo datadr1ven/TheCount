@@ -16,7 +16,6 @@ import {
   Legend,
 } from "recharts";
 import LogMeasurementModal from "@/components/LogMeasurementModal";
-import { createClient } from "@/lib/supabase/client";
 import { supabase } from "@/lib/supabase/client";
 
 export default function DashboardPage() {
@@ -58,7 +57,7 @@ export default function DashboardPage() {
     })
     .slice(0, 30);
 
-  const caloriesMap = {};
+  const caloriesMap: { [key: string]: number } = {};
   measurements
     .filter((m) => m.type === "calories")
     .forEach((m) => {

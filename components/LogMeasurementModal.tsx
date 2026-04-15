@@ -24,6 +24,7 @@ export default function LogMeasurementModal({
   open,
   onOpenChange,
 }: LogMeasurementModalProps) {
+  const [error, setError] = useState<string | null>(null);
   const [measurementType, setMeasurementType] = useState("weight");
   const [value, setValue] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
