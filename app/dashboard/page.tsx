@@ -26,8 +26,7 @@ export default function DashboardPage() {
     const { data, error } = await supabase
       .from("measurements")
       .select("*")
-      .order("date", { ascending: true })
-      .limit(30);
+      .order("date", { ascending: true });
     if (data) {
       setMeasurements(data);
     }
