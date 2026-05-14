@@ -41,8 +41,7 @@ export default function DashboardPage() {
     .map((m) => ({
       date: new Date(m.date).toISOString().split("T")[0],
       value: parseFloat(m.value),
-    }))
-    .slice(0, 30);
+    }));
 
   const bpData = measurements
     .filter((m) => m.type === "bp")
@@ -53,8 +52,7 @@ export default function DashboardPage() {
         systolic,
         diastolic,
       };
-    })
-    .slice(0, 30);
+    });
 
   const caloriesMap: { [key: string]: number } = {};
   measurements
@@ -68,8 +66,7 @@ export default function DashboardPage() {
     .map((date) => ({
       date,
       value: caloriesMap[date],
-    }))
-    .slice(0, 30);
+    }));
 
   const latestWeight =
     weightData.length > 0 ? weightData[weightData.length - 1] : { value: 0 };
